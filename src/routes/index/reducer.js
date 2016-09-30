@@ -2,19 +2,18 @@ import {
   combineReducers,
 } from 'redux';
 import {
-  LOG_IN,
+  GET_TEXT,
 } from './action';
 
-// 用户信息
-function user(state = {}, action) {
+function str(state = '', action) {
   switch (action.type) {
-    case LOG_IN:
-      return action.user;
+    case GET_TEXT:
+      return action.text;
     default:
       return state;
   }
 }
 
 export default combineReducers({
-  user,
+  str,
 });

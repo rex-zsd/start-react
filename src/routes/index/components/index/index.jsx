@@ -1,10 +1,22 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 
+const propTypes = {
+  getText: PropTypes.func.isRequired,
+  str: PropTypes.string.isRequired,
+};
 
-function Index() {
-  return (
-    <div>this is index.</div>
-  );
+class Index extends Component {
+  componentDidMount() {
+    this.props.getText('this is index');
+  }
+
+  render() {
+    return (
+      <div>{this.props.str}</div>
+    );
+  }
 }
+
+Index.propTypes = propTypes;
 
 export default Index;

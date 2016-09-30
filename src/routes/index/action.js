@@ -1,9 +1,9 @@
-export const LOG_IN = 'LOG_IN';
+export const GET_TEXT = 'GET_TEXT';
 
 // 登录行为
-export function login(user) {
+export function getText(text) {
   return {
-    type: LOG_IN,
-    user,
+    type: GET_TEXT,
+    text,
   };
 }
