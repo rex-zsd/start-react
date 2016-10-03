@@ -4,6 +4,8 @@ import { render } from 'react-dom';
 import { syncHistoryWithStore } from 'react-router-redux';
 import AppContainer from './containers/AppContainer';
 
+import 'util/fetch';
+
 import createRoutes from './routes';
 import configureStore from './store';
 /* eslint no-underscore-dangle: ["error", { "allow": ["__INITIAL_STATE__"] }] */

@@ -1,11 +1,14 @@
 import { connect } from 'react-redux';
 import Index from './components/index/';
 import { getText } from './action';
+import fetchDataSync from './thunk';
 
 // 组织异步action方法
 const mapActionCreators = {
   getText,
+  fetchDataSync,
 };
+
 // 组织注入变量
 function mapStateToprops(state) {
   return {

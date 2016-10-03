@@ -1,9 +1,5 @@
-import {
-  combineReducers,
-} from 'redux';
-import {
-  GET_TEXT,
-} from './action';
+import { combineReducers } from 'redux';
+import { GET_TEXT } from './action';
 
 function str(state = '', action) {
   switch (action.type) {

@@ -1,9 +1,11 @@
+const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 
 const webpackConfig = {
   target: 'web',
+  devtool: 'source-map',
   entry: {
     vendor: [
       'react',
@@ -18,16 +20,15 @@ const webpackConfig = {
     ],
     common: ['./src/index.jsx'],
   },
-  devtool: 'source-map',
   output: {
-    path: `${__dirname}/dist`,
+    path: path.resolve(__dirname, 'dist'),
     filename: '[name].bundle.[hash:8].js',
     chunkFilename: '[name].chunk.[hash:8].js',
   },
   module: {
     loaders: [{
       test: /\.jsx?$/,
-      exclude: /(node_modules|bower_components)/,
+      exclude: /(node_modules|bower_components|lib)/,
       loader: 'babel',
       query: {
         presets: [
@@ -44,19 +45,23 @@ const webpackConfig = {
       loader: 'style!css',
     }, {
       test: /\.less$/,
-      loader: 'style!css?modules&localIdentName=[name]__[local]___[hash:base64:5]!less',
+      loader: 'style!css?modules&localIdentName=[name]__[local]___[hash:base64:5]&importLoaders=1!postcss!less',
     }, {
       test: /\.(jpe?g|gif|png|svg)$/i,
       loader: 'url-loader?limit=10000',
     }],
   },
-  postcss: function postcss() {
+  postcss() {
     return [autoprefixer({
       browsers: ['> 5%'],
     })];
   },
   resolve: {
     extensions: ['', '.js', '.jsx', '.json'],
+    alias: {
+      util: path.resolve(__dirname, 'src/util/'),
+      components: path.resolve(__dirname, 'src/components/'),
+    },
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -80,7 +85,7 @@ const webpackConfig = {
         collapseInlineTagWhitespace: true,
         minifyCSS: true,
         minifyJS: true,
-          // removeComments: true
+        // removeComments: true
       },
     }),
   ],

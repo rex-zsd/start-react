@@ -1,12 +1,15 @@
-const LOGIN_LIST = [
-    '/user'
-];
+// const LOGIN_LIST = [
+//   '/user',
+// ];
 
 export default (prevState, nextState) => {
-    // if (LOGIN_LIST.indexOf(nextState.location.pathname) < 0)
-    //     return false;
-    // return true;
-}
+  console.log(prevState, nextState);
+  return true;
+  // if (LOGIN_LIST.indexOf(nextState.location.pathname) < 0) {
+  //   return false;
+  // }
+  // return true;
+};
 
 // onEnter(nextState, replace, callback) {
 //   const check = checkAuth('', nextState);

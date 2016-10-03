@@ -1,26 +1,24 @@
 import config from '../config';
 
-const assistantHost = config[process.env.NODE_ENV].assistantHost;
-const _fetch = window.fetch;
+const baseUrl = config[process.env.NODE_ENV].url;
+const originFetch = window.fetch;
 
 // 序列化query参数
 function formatQuery(query) {
   let param = '';
-  for (const i in query) {
+  Object.keys(query).forEach((key) => {
     if (!param.length) {
-      param = `${param}${i}=${query[i]}`;
+      param = `${param}${key}=${query[key]}`;
     } else {
-      param = `&${param}${i}=${query[i]}`;
+      param = `${param}&${key}=${query[key]}`;
     }
-  }
+  });
   return param;
 }
 
 // 导出自定义fetch方法
-export default function myFetch(url, data) {
-  const query = formatQuery(data.query);
+export default function myFetch(url, data = {}) {
+  const query = formatQuery(data.query || {});
   // 发起请求
-  return _fetch(`${assistantHost}${url}?${query}`, data)
-    .then(res => res.json())
-    .then(res => res.data);
+  return originFetch(`${baseUrl}${url}?${query}`, data);
 }

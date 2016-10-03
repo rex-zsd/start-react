@@ -4,6 +4,7 @@ export default store => ({
     require.ensure([], (require) => {
       const Index = require('./container').default;
       const reducer = require('./reducer').default;
+
       store.injectReducer({ key: 'index', reducer });
       callback(null, Index);
     }, 'index');

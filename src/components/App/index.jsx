@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import './style.less';
+import styles from './style.less';
 
 const propTypes = {
   children: PropTypes.object.isRequired,
@@ -7,7 +7,7 @@ const propTypes = {
 
 function App(props) {
   return (
-    <div>
+    <div className={styles.a}>
       hello world! {props.children}
     </div>
   );
