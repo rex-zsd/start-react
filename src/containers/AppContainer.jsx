@@ -1,4 +1,4 @@
-import React, { PropTypes, Component } from 'react';
+import React, { PropTypes } from 'react';
 import { Router } from 'react-router';
 import { Provider } from 'react-redux';
 
@@ -8,21 +8,13 @@ const propTypes = {
   store: PropTypes.object.isRequired,
 };
 
-class AppContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      a: 1,
-    };
-  }
-  render() {
-    const { history, routes, store } = this.props;
-    return (
-      <Provider store={store}>
-        <Router history={history} routes={routes} />
-      </Provider>
-    );
-  }
+function AppContainer(props) {
+  const { history, routes, store } = props;
+  return (
+    <Provider store={store}>
+      <Router history={history} routes={routes} />
+    </Provider>
+  );
 }
 
 AppContainer.propTypes = propTypes;

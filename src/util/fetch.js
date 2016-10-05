@@ -17,7 +17,7 @@ function formatQuery(query) {
 }
 
 // 导出自定义fetch方法
-export default function myFetch(url, data = {}) {
+export default function (url, data = {}) {
   const query = formatQuery(data.query || {});
   // 发起请求
   return originFetch(`${baseUrl}${url}?${query}`, data);

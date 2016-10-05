@@ -1,10 +1,8 @@
-// redux
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
-// redux-thunk
 import thunk from 'redux-thunk';
-// react-router-redux
 import { routerReducer as routing, routerMiddleware } from 'react-router-redux';
 
+// 组合异步 reducer 与 location reducer
 const reducers = asyncReducers => combineReducers({
   ...asyncReducers,
   routing,

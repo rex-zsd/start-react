@@ -67,7 +67,7 @@ const webpackConfig = {
     new webpack.DefinePlugin({
       'process.env': {
         CLIENT: JSON.stringify(true),
-        NODE_ENV: JSON.stringify('development'),
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV),
       },
     }),
     new webpack.optimize.CommonsChunkPlugin({

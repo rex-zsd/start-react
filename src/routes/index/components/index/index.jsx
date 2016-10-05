@@ -3,11 +3,11 @@ import React, { Component, PropTypes } from 'react';
 const propTypes = {
   getText: PropTypes.func.isRequired,
   str: PropTypes.string.isRequired,
+  fetchDataSync: PropTypes.func.isRequired,
 };
 
 class Index extends Component {
   componentDidMount() {
-    console.log(this.props);
     this.props.getText('this is index');
     this.props.fetchDataSync();
   }
