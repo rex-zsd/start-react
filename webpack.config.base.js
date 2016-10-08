@@ -1,9 +1,9 @@
-const path = require('path');
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const autoprefixer = require('autoprefixer');
+var path = require('path');
+var webpack = require('webpack');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+var autoprefixer = require('autoprefixer');
 
-const webpackConfig = {
+var webpackConfig = {
   target: 'web',
   devtool: 'source-map',
   entry: {
@@ -51,7 +51,7 @@ const webpackConfig = {
       loader: 'url-loader?limit=10000',
     }],
   },
-  postcss() {
+  postcss: function() {
     return [autoprefixer({
       browsers: ['> 5%'],
     })];

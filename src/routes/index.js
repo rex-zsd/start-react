@@ -7,7 +7,7 @@ const createRoutes = store => ({
   component: App,
   onEnter,
   onChange,
-  indexRoute: null,
+  indexRoute: index(store),
   childRoutes: [index(store)],
 });
 
