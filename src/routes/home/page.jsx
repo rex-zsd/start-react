@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import styles from './style.less';
 
 const propTypes = {
   getText: PropTypes.func.isRequired,
@@ -13,7 +14,7 @@ class Index extends Component {
   }
   render() {
     return (
-      <div>{this.props.str}</div>
+      <div className={styles.home}>{this.props.str}</div>
     );
   }
 }

@@ -15,10 +15,16 @@ var webpackDevConfig = {
     hot: true,
     inline: true,
     progress: true,
-    contentBase: './src',
     port: port,
-    publicPath: '/',
-    compress: true,
+    compress: false,
+    headers: {
+      'Access-Control-Allow-Origin': '*'
+    },
+    contentBase: 'http://localhost:' + port,
+    quiet: false,
+    noInfo: false,
+    lazy: false,
+    publicPath: webpackBaseConfig.output.publicPath || '/'
   },
   entry: {
     common: [

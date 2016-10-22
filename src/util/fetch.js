@@ -8,7 +8,7 @@ function formatQuery(query) {
   let param = '';
   Object.keys(query).forEach((key) => {
     if (!param.length) {
-      param = `${param}${key}=${query[key]}`;
+      param = `${key}=${query[key]}`;
     } else {
       param = `${param}&${key}=${query[key]}`;
     }

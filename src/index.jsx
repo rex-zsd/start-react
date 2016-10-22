@@ -1,3 +1,4 @@
+import 'babel-polyfill';
 import React from 'react';
 import browserHistory from 'react-router/lib/browserHistory';
 import { render } from 'react-dom';
@@ -9,7 +10,7 @@ import './style.less';
 
 import AppContainer from './containers/AppContainer';
 import createRoutes from './routes';
-import configureStore from './store';
+import configureStore from './redux';
 
 /* eslint no-underscore-dangle: ["error", { "allow": ["__INITIAL_STATE__"] }] */
 const store = configureStore(window.__INITIAL_STATE__, browserHistory);

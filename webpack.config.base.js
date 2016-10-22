@@ -17,7 +17,7 @@ var webpackConfig = {
       'react-router-redux',
       'isomorphic-fetch', // fetch polyfill
       'babel-polyfill', // babel-polyfill
-      'es5-shim',
+      // 'es5-shim',
     ],
     common: ['./src/index.jsx'],
   },
@@ -65,6 +65,8 @@ var webpackConfig = {
     },
   },
   plugins: [
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.DedupePlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         CLIENT: JSON.stringify(true),

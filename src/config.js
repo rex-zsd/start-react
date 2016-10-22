@@ -1,6 +1,9 @@
 const config = {
   development: {
-    url: '//t.assistant.120yibao.com/yb/',
+    url: '',
+  },
+  test: {
+    url: '',
   },
   production: {
     url: '',
