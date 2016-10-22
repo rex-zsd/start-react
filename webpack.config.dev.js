@@ -1,34 +1,37 @@
+/* eslint-disable */
 var OpenBrowserPlugin = require('open-browser-webpack-plugin');
-var webpackConfig = require('./webpack.config.base');
 var webpack = require('webpack');
+var merge = require('webpack-merge');
+var webpackBaseConfig = require('./webpack.config.base');
 
 var port = 9002;
+var https = false;
+var protocol = https ? 'https:' : 'http:';
 
-webpackConfig.devServer = {
-  historyApiFallback: true,
-  https: false,
-  hot: true,
-  inline: true,
-  progress: true,
-  contentBase: './src',
-  port: port,
-  publicPath: '/',
-  compress: true,
-};
+var webpackDevConfig = {
+  devServer: {
+    historyApiFallback: true,
+    https: https,
+    hot: true,
+    inline: true,
+    progress: true,
+    contentBase: './src',
+    port: port,
+    publicPath: '/',
+    compress: true,
+  },
+  entry: {
+    common: [
+      'webpack/hot/dev-server',
+      'webpack-dev-server/client?http://localhost:' + port,
+    ]
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new OpenBrowserPlugin({
+      url: protocol + '//localhost:' + port,
+    })
+  ]
+}
 
-webpackConfig.entry.common = webpackConfig.entry.common.concat([
-  'webpack/hot/dev-server',
-  'webpack-dev-server/client?http://localhost:' + port,
-]);
-
-var protocol = webpackConfig.devServer.https ? 'https:' : 'http:';
-
-webpackConfig.plugins = webpackConfig.plugins.concat([
-  new webpack.HotModuleReplacementPlugin(),
-  new OpenBrowserPlugin({
-    url: protocol + '//localhost:' + port,
-  }),
-]);
-
-
-module.exports = webpackConfig;
+module.exports = merge(webpackBaseConfig, webpackDevConfig);

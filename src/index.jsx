@@ -18,4 +18,9 @@ const history = syncHistoryWithStore(browserHistory, store, {
 });
 
 render(
-  <AppContainer store={store} history={history} routes={createRoutes(store)} />, document.getElementById('J_page'));
+  <AppContainer
+    store={store}
+    history={history}
+    routes={createRoutes(store)}
+  />, document.getElementById('J_page')
+);
