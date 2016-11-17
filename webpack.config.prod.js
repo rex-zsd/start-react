@@ -3,7 +3,7 @@ var webpack = require('webpack');
 var merge = require('webpack-merge');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
 
-var webpackBaseConfig = require('./webpack.config.base');
+var webpackBaseConfig = require('./webpack.config');
 
 var webpackProdConfig = {
   plugins: [

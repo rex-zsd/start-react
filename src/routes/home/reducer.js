@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import fetch from 'util/fetch';
+import fetch from '../../util/fetch';
 
 export const GET_TEXT = 'GET_TEXT';
 
