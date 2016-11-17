@@ -4,7 +4,6 @@ import {render} from 'react-dom';
 import {Router} from 'react-router';
 import {Provider} from 'react-redux';
 import {syncHistoryWithStore} from 'react-router-redux';
-import './util/fetch';
 import './style.less';
 import createRoutes from './routes';
 import configureStore from './redux';

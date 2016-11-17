@@ -8,13 +8,12 @@ class Index extends Component {
         fetchDataSync: PropTypes.func.isRequired
     }
     componentWillMount() {
-        // console.log(444);
+        console.log(444);
     }
     componentDidMount() {
-        this.props.getText('this is index');
+        this.props.getText('this is user');
         // this.props.fetchDataSync();
         console.log(this.props);
-        this.props.router.push('user');
     }
     render() {
         return (

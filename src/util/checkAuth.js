@@ -1,5 +1,5 @@
 const LOGIN_LIST = [
-  '/user',
+  // '/user',
 ];
 
 function checkAuth(nextState) {

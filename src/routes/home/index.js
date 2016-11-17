@@ -2,11 +2,11 @@ export default store => ({
   // path: 'home',
   getComponent(location, callback) {
     require.ensure([], (require) => {
-      const Index = require('./container').default;
+      const container = require('./container').default;
       const reducer = require('./reducer').default;
 
       store.injectReducer({ key: 'home', reducer });
-      callback(null, Index);
+      callback(null, container);
     }, 'home');
   },
 });

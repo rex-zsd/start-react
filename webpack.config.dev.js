@@ -20,19 +20,13 @@ const webpackDevConfig = {
         headers: {
           'Access-Control-Allow-Origin': '*'
         },
-        contentBase: 'http://localhost:' + port,
+        contentBase: './src',
         quiet: false,
         noInfo: false,
         lazy: false,
         publicPath: webpackBaseConfig.output.publicPath || '/'
     },
     devtool: 'source-map',
-    entry: {
-        common: [
-            'webpack/hot/dev-server',
-            `webpack-dev-server/client?${protocol}//localhost:${port}`
-        ]
-    },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new OpenBrowserPlugin({

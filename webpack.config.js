@@ -4,7 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const babelQuery = JSON.parse(fs.readFileSync('./.babelrc'));
 const path = require('path');
-
+const pages = require('./page');
+console.log(pages);
 const webpackConfig = {
     target: 'web',
     entry: {
@@ -58,17 +59,12 @@ const webpackConfig = {
         extensions: ['', '.js', '.jsx', '.json']
     },
     plugins: [
-        new webpack.optimize.OccurenceOrderPlugin(),
-        new webpack.optimize.DedupePlugin(),
         new webpack.DefinePlugin({
             'process.env': {
-                'CLIENT': JSON.stringify(true),
-                'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-            }
-        }),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'common',
-            minChunks: Infinity
+                CLIENT: JSON.stringify(true),
+                NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+            },
+            PAGES: JSON.stringify(pages)
         }),
         new HtmlWebpackPlugin({
             title: 'start-react',
