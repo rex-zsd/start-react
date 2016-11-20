@@ -12,7 +12,6 @@ class Index extends Component {
     }
     componentDidMount() {
         this.props.getText('this is user');
-        // this.props.fetchDataSync();
         console.log(this.props);
     }
     render() {
