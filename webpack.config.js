@@ -1,11 +1,12 @@
 const fs = require('fs');
+const path = require('path');
+
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
-const babelQuery = JSON.parse(fs.readFileSync('./.babelrc'));
-const path = require('path');
+
 const pages = require('./page');
-console.log(pages);
+
 const webpackConfig = {
     target: 'web',
     entry: {
@@ -33,7 +34,9 @@ const webpackConfig = {
             test: /\.jsx?$/,
             exclude: /(node_modules|bower_components)/,
             loader: 'babel',
-            query: babelQuery
+            query: {
+                cacheDirectory: true
+            }
         }, {
             test: /\.json$/,
             loader: 'json'

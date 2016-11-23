@@ -2,6 +2,12 @@ import React, {Component, PropTypes} from 'react';
 import styles from './style.less';
 
 class Index extends Component {
+    constructor() {
+        super();
+        this.state = {
+            user: 'rex'
+        };
+    }
     static propTypes = {
         getText: PropTypes.func.isRequired,
         str: PropTypes.string.isRequired,
@@ -17,8 +23,9 @@ class Index extends Component {
         this.props.router.push('user');
     }
     render() {
+        const state = this.state;
         return (
-            <div className={styles.home}>{this.props.str}</div>
+            <div className={styles.home}>{this.props.str}{state.user}</div>
         );
     }
 }
