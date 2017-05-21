@@ -2,13 +2,15 @@
 var webpack = require('webpack');
 var merge = require('webpack-merge');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
-
 var webpackBaseConfig = require('./webpack.config');
+
+const config = require('./src/config')[process.env.NODE_ENV];
 
 var webpackProdConfig = {
     plugins: [
-        new webpack.optimize.OccurenceOrderPlugin(),
-        new webpack.optimize.DedupePlugin(),
+        new webpack.DefinePlugin({
+            CONFIG: JSON.stringify(config)
+        }),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'common',
             minChunks: Infinity

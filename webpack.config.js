@@ -1,73 +1,62 @@
-const fs = require('fs');
 const path = require('path');
-
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const autoprefixer = require('autoprefixer');
 
 const pages = require('./page');
 
 const webpackConfig = {
     target: 'web',
+    devtool: 'source-map',
     entry: {
-        common: ['./src/index.jsx'],
-        vendor: [
-            'react',
-            'react-dom',
-            'redux',
-            'react-redux',
-            'react-router',
-            'react-router-redux',
-            'isomorphic-fetch',
-            'babel-polyfill',
-            'es5-shim',
-            'normalize.css'
-        ]
+        common: [
+            './src/index.jsx'
+        ],
     },
     output: {
         path: `${__dirname}/dist`,
-        filename: '[name].bundle.[hash:8].js',
-        chunkFilename: '[name].chunk.[hash:8].js'
+        filename: '[name].bundle.[chunkhash:8].js',
+        chunkFilename: '[name].chunk.[chunkhash:8].js',
+        publicPath: '/'
     },
     module: {
-        loaders: [{
+        rules: [{
             test: /\.jsx?$/,
-            exclude: /(node_modules|bower_components)/,
-            loader: 'babel',
-            query: {
+            exclude: /node_modules/,
+            loader: 'babel-loader',
+            options: {
                 cacheDirectory: true
             }
         }, {
-            test: /\.json$/,
-            loader: 'json'
-        }, {
             test: /\.css$/,
-            include: /node_modules/,
-            exclude: './src/',
-            loader: 'style!css!postcss'
+            loader: 'style-loader!css-loader'
         }, {
             test: /\.less$/,
-            loader: 'style!css?modules&localIdentName=[name]__[local]___[hash:base64:5]!postcss!less'
+            loader: 'style-loader!css-loader?modules&localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader!less-loader'
         }, {
             test: /\.(jpe?g|gif|png|svg)$/i,
-            loader: 'url-loader?limit=10000'
+            loader: 'url-loader',
+            options: {
+                limit: 2000,
+                mimetype: 'image/png',
+                name: '[name]-[hash].[ext]'
+            }
         }]
     },
-    postcss: function() {
-        return [autoprefixer({
-            browsers: ['> 5%']
-        })];
-    },
     resolve: {
-        extensions: ['', '.js', '.jsx', '.json']
+        alias: {
+            src: path.resolve(__dirname, 'src/')
+        },
+        mainFields: ['jsnext:main', 'browser', 'main', 'module'],
+        extensions: ['.js', '.jsx', '.json']
     },
     plugins: [
         new webpack.DefinePlugin({
-            'process.env': {
-                CLIENT: JSON.stringify(true),
-                NODE_ENV: JSON.stringify(process.env.NODE_ENV)
-            },
             PAGES: JSON.stringify(pages)
+        }),
+        new webpack.EnvironmentPlugin({
+            NODE_ENV: 'development',
+            CLIENT: true,
+            APP: false
         }),
         new HtmlWebpackPlugin({
             title: 'start-react',

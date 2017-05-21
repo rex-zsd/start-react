@@ -1,5 +1,6 @@
-import React, {Component, PropTypes} from 'react';
+import React, { Component } from 'react';
 import styles from './style.less';
+import PropTypes from 'prop-types';
 
 class Index extends Component {
     constructor() {
@@ -20,12 +21,12 @@ class Index extends Component {
         this.props.getText('this is index');
         // this.props.fetchDataSync();
         console.log(this.props);
-        this.props.router.push('user');
+        // this.props.router.push('user');
     }
     render() {
         const state = this.state;
         return (
-            <div className={styles.home}>{this.props.str}{state.user}</div>
+            <div className={styles.home}>{this.props.str} {state.user}</div>
         );
     }
 }

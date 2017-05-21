@@ -1,7 +1,8 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import styles from './style.less';
 
-class App extends Component {
+export default class App extends Component {
     static propTypes = {
         children: PropTypes.object.isRequired
     }
@@ -15,5 +16,3 @@ class App extends Component {
         );
     }
 }
-
-module.exports = App;

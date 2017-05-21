@@ -1,37 +1,49 @@
+const url = require('url');
+const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 
-const port = process.env.PORT;
-const https = JSON.parse(process.env.HTTPS);
-const protocol = https ? 'https:' : 'http:';
 const webpackBaseConfig = require('./webpack.config');
 
+const port = process.env.PORT || 9000;
+const https = JSON.parse(process.env.HTTPS);
+const protocol = https ? 'https:' : 'http:';
+
+const config = require('./src/config')[process.env.NODE_ENV];
+const urlObject = url.parse(config.url, true, true);
+urlObject.protocol = urlObject.protocol || 'http:';
+config.url = '/api';
+
 const webpackDevConfig = {
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: '[name].bundle.js',
+        chunkFilename: '[name].chunk.js',
+        publicPath: '/'
+    },
     devServer: {
-        historyApiFallback: true,
-        https: https,
         hot: true,
         inline: true,
-        progress: true,
-        port: port,
-        compress: false,
-        headers: {
-          'Access-Control-Allow-Origin': '*'
+        historyApiFallback: true,
+        https,
+        host: '0.0.0.0',
+        port,
+        compress: true,
+        contentBase: webpackBaseConfig.output.path,
+        publicPath: webpackBaseConfig.output.publicPath,
+        proxy: {
+            '/api': {
+                target: urlObject.protocol + '//' + urlObject.host,
+                pathRewrite: { '^/api': urlObject.pathname },
+                secure: false,
+                changeOrigin: true
+            }
         },
-        contentBase: './src',
-        quiet: false,
-        noInfo: false,
-        lazy: false,
-        publicPath: webpackBaseConfig.output.publicPath || '/'
+        open: true,
     },
-    devtool: 'source-map',
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
-        new OpenBrowserPlugin({
-            url: `${protocol}//localhost:${port}`
-        })
+        new webpack.DefinePlugin({ CONFIG: JSON.stringify(config) }),
     ]
 };
 

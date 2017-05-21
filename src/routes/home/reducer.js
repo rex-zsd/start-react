@@ -20,7 +20,7 @@ export function getText(text) {
 }
 
 export function fetchDataSync() {
-  return async(dispatch, getState) => {
+  return async (dispatch, getState) => {
     const text = await fetch('http://www.baidu.com')
         .then(res => res.text());
     const state = getState();

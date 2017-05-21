@@ -1,5 +1,6 @@
-import React, {Component, PropTypes} from 'react';
+import React, { Component } from 'react';
 import styles from './style.less';
+import PropTypes from 'prop-types';
 
 class Index extends Component {
     static propTypes = {
@@ -11,6 +12,7 @@ class Index extends Component {
         console.log(444);
     }
     componentDidMount() {
+        this.props.fetchDataSync();
         this.props.getText('this is user');
         console.log(this.props);
     }
