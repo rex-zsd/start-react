@@ -1,12 +1,12 @@
-/* eslint-disable */
-var webpack = require('webpack');
-var merge = require('webpack-merge');
-var CleanWebpackPlugin = require('clean-webpack-plugin');
-var webpackBaseConfig = require('./webpack.config');
+const webpack = require('webpack');
+const merge = require('webpack-merge');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
-const config = require('./src/config')[process.env.NODE_ENV];
+const webpackBaseConfig = require('./webpack.config');
+const config = require('./config')[process.env.NODE_ENV];
 
-var webpackProdConfig = {
+const webpackProdConfig = {
     plugins: [
         new webpack.DefinePlugin({
             CONFIG: JSON.stringify(config)
@@ -15,14 +15,7 @@ var webpackProdConfig = {
             name: 'common',
             minChunks: Infinity
         }),
-        new webpack.optimize.UglifyJsPlugin({
-            output: {
-                comments: false,
-            },
-            compress: {
-                warnings: false,
-            },
-        }),
+        new UglifyJSPlugin(),
         new CleanWebpackPlugin(['dist'], {
             root: __dirname, //  An absolute path for the root.
             verbose: true, //  Write logs to console.

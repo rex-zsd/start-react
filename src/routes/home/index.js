@@ -1,12 +1,14 @@
 export default store => ({
     // path: 'home',
     getComponent(location, callback) {
-        require.ensure([], (require) => {
-            const container = require('./container').default;
-            const reducer = require('./reducer').default;
 
-            store.injectReducer({key: 'home', reducer});
-            callback(null, container);
-        }, 'home');
+        import('./reducer').then(reducer => {
+            store.injectReducer({ key: 'home', reducer: reducer.default });
+        });
+
+        import('./page').then(page => {
+            callback(null, page.default);
+        });
+
     }
 });

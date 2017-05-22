@@ -1,34 +1,42 @@
 import React, { Component } from 'react';
-import styles from './style.less';
-import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-class Index extends Component {
+import { setText, fetchDataSync } from './reducer';
+import styles from './style.less';
+
+const mapStateToProps = (state, ownProps) => ({
+    str: state.home.str
+});
+
+const mapActionCreators = {
+    setText,
+    fetchDataSync,
+};
+
+@connect(mapStateToProps, mapActionCreators)
+export default class Home extends Component {
     constructor() {
         super();
         this.state = {
             user: 'rex'
         };
+
+        this.handleClick = this.handleClick.bind(this);
     }
-    static propTypes = {
-        getText: PropTypes.func.isRequired,
-        str: PropTypes.string.isRequired,
-        fetchDataSync: PropTypes.func.isRequired
-    }
-    componentWillMount() {
-        // console.log(444);
-    }
+
     componentDidMount() {
-        this.props.getText('this is index');
         // this.props.fetchDataSync();
         console.log(this.props);
         // this.props.router.push('user');
     }
+
+    handleClick() {
+        this.props.fetchDataSync();
+    }
+
     render() {
-        const state = this.state;
         return (
-            <div className={styles.home}>{this.props.str} {state.user}</div>
+            <div className={styles.home} onClick={this.handleClick}>{this.props.str} {this.state.user}</div>
         );
     }
 }
-
-export default Index;

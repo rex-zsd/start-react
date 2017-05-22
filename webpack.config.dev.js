@@ -9,7 +9,7 @@ const port = process.env.PORT || 9000;
 const https = JSON.parse(process.env.HTTPS);
 const protocol = https ? 'https:' : 'http:';
 
-const config = require('./src/config')[process.env.NODE_ENV];
+const config = require('./config')[process.env.NODE_ENV];
 const urlObject = url.parse(config.url, true, true);
 urlObject.protocol = urlObject.protocol || 'http:';
 config.url = '/api';

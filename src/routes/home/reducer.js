@@ -1,34 +1,29 @@
 import { combineReducers } from 'redux';
-import fetch from '../../util/fetch';
-
-export const GET_TEXT = 'GET_TEXT';
+// import fetch from '../../util/fetch';
 
 function str(state = '', action) {
-  switch (action.type) {
-    case GET_TEXT:
-      return action.text;
-    default:
-      return state;
-  }
+    switch (action.type) {
+        case 'SET_TEXT':
+            return action.payload;
+        case 'GET_TEXT':
+            return action.payload;
+        default:
+            return state;
+    }
 }
 
-export function getText(text) {
-  return {
-    type: GET_TEXT,
-    text,
-  };
+export function setText(payload) {
+    return {
+        type: 'SET_TEXT',
+        payload,
+    };
 }
 
-export function fetchDataSync() {
-  return async (dispatch, getState) => {
-    const text = await fetch('http://www.baidu.com')
-        .then(res => res.text());
-    const state = getState();
-    console.log(state);
-    console.log(text);
-  };
-}
+export const fetchDataSync = () => async(dispatch, getState) => {
+    const text = await fetch('http://www.baidu.com').then(res => res.text());
+    dispatch(setText(text));
+};
 
 export default combineReducers({
-  str,
+    str,
 });

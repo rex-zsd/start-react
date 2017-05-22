@@ -9,6 +9,9 @@ const webpackConfig = {
     devtool: 'source-map',
     entry: {
         common: [
+            'isomorphic-fetch',
+            'core-js',
+            'normalize.css',
             './src/index.jsx'
         ],
     },
