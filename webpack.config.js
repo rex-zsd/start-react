@@ -56,6 +56,9 @@ const webpackConfig = {
         new webpack.DefinePlugin({
             PAGES: JSON.stringify(pages)
         }),
+        new webpack.ProvidePlugin({
+            React: 'react'
+        }),
         new webpack.EnvironmentPlugin({
             NODE_ENV: 'development',
             CLIENT: true,
