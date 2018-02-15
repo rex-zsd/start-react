@@ -4,4 +4,4 @@ node_js:
   - "7"
 
 script:
-  - npm run prod
+  - npm run build:prod
