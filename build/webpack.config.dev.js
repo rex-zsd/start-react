@@ -27,6 +27,7 @@ const webpackDevConfig = {
         historyApiFallback: true,
         https,
         host: '0.0.0.0',
+        disableHostCheck: true,
         port,
         compress: true,
         contentBase: webpackBaseConfig.output.path,
@@ -40,6 +41,7 @@ const webpackDevConfig = {
             }
         },
         open: true,
+        openPage: '',
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),

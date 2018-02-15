@@ -5,38 +5,38 @@ import { setText, fetchDataSync } from './reducer';
 import styles from './style.less';
 
 const mapStateToProps = (state, ownProps) => ({
-    str: state.home.str
+  str: state.home.str,
 });
 
 const mapActionCreators = {
-    setText,
-    fetchDataSync,
+  setText,
+  fetchDataSync,
 };
 
 @connect(mapStateToProps, mapActionCreators)
 export default class Home extends Component {
-    constructor() {
-        super();
-        this.state = {
-            user: 'rex'
-        };
+  constructor() {
+    super();
+    this.state = {
+      user: 'rex',
+    };
+  }
 
-        this.handleClick = this.handleClick.bind(this);
-    }
+  componentDidMount() {
+    // this.props.fetchDataSync();
+    console.log(this.props);
+    // this.props.router.push('user');
+  }
 
-    componentDidMount() {
-        // this.props.fetchDataSync();
-        console.log(this.props);
-        // this.props.router.push('user');
-    }
+  handleClick = () => {
+    this.props.fetchDataSync();
+  };
 
-    handleClick() {
-        this.props.fetchDataSync();
-    }
-
-    render() {
-        return (
-            <div className={styles.home} onClick={this.handleClick}>{this.props.str} {this.state.user}</div>
-        );
-    }
+  render() {
+    return (
+      <div className={styles.home} onClick={this.handleClick}>
+        {this.props.str} {this.state.user}
+      </div>
+    );
+  }
 }

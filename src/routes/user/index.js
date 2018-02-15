@@ -7,16 +7,14 @@
  */
 
 export default store => ({
-    path: 'user',
-    getComponent(location, callback) {
+  path: 'user',
+  getComponent(location, callback) {
+    import('./reducer').then((reducer) => {
+      store.injectReducer({ key: 'user', reducer: reducer.default });
+    });
 
-        import('./reducer').then(reducer => {
-            store.injectReducer({ key: 'user', reducer: reducer.default });
-        });
-
-        import('./page').then(page => {
-            callback(null, page.default);
-        });
-
-    }
+    import('./page').then((page) => {
+      callback(null, page.default);
+    });
+  },
 });

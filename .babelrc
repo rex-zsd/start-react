@@ -1,22 +1,13 @@
 {
     "presets": [
-        ["env", {
-            "targets": {
-                "browsers": ["> 1%", "last 2 versions"]
-            },
-            "modules": false,
-            "useBuiltIns": true,
-            "debug": true
-        }],
-        "react",
-        "stage-0"
-    ],
-    "plugins": [
-        ["transform-runtime", {
-            "helpers": false,
-            "polyfill": false,
-            "regenerator": true
-        }],
-        "transform-decorators-legacy"
+        [
+            "@babel/preset-env",
+            {
+                "useBuiltIns": "usage",
+                "debug": false
+            }
+        ],
+        "@babel/preset-react",
+        "@babel/preset-stage-0"
     ]
 }

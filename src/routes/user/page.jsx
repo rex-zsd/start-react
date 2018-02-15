@@ -8,12 +8,10 @@
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state, ownProps) => ({
-    name: state.user.name,
+  name: state.user.name,
 });
 
 // stateless组件
-const component = (props) => (
-    <span>{props.name}</span>
-);
+const component = props => <span>{props.name}</span>;
 
 export default connect(mapStateToProps)(component);

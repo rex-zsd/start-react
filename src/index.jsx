@@ -11,18 +11,15 @@ import configureStore from './redux';
 /* eslint no-underscore-dangle: ["error", { "allow": ["__INITIAL_STATE__"] }] */
 const store = configureStore(window.__INITIAL_STATE__, browserHistory);
 const history = syncHistoryWithStore(browserHistory, store, {
-    selectLocationState: state => state.routing
+  selectLocationState: state => state.routing,
 });
 
 const routes = createRoutes(store);
 
 const App = (
-    <Provider store={store}>
-        <Router routes={routes} history={history}/>
-    </Provider>
+  <Provider store={store}>
+    <Router routes={routes} history={history} />
+  </Provider>
 );
 
-render(
-    App,
-    document.getElementById('J_page')
-);
+render(App, document.getElementById('J_page'));

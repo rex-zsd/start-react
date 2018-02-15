@@ -9,21 +9,21 @@
 import { combineReducers } from 'redux';
 
 function name(state = 'user', action) {
-    switch (action.type) {
-        case 'UPDATE':
-            return action.payload;
-        default:
-            return state;
-    }
+  switch (action.type) {
+    case 'UPDATE':
+      return action.payload;
+    default:
+      return state;
+  }
 }
 
 export function setName(payload) {
-    return {
-        type: 'UPDATE',
-        payload,
-    };
+  return {
+    type: 'UPDATE',
+    payload,
+  };
 }
 
 export default combineReducers({
-    name
+  name,
 });
