@@ -2,7 +2,7 @@
   "extends": "stylelint-config-standard",
   "plugins": ["stylelint-order"],
   "rules": {
-    "indentation": 4,
+    "indentation": 2,
     "order/order": [
       "declarations",
       "custom-properties",

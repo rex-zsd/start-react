@@ -6,21 +6,21 @@ import { composeWithDevTools } from 'redux-devtools-extension/logOnlyInProductio
 const asyncReducers = {};
 
 // 组合异步 reducer 与 location reducer
-const reducers = asyncReducers => combineReducers({
+const reducers = asyncReducers =>
+  combineReducers({
     ...asyncReducers,
     routing,
-});
+  });
 
 export default function configureStore(initialState = {}, history) {
+  const middleware = [thunk, routerMiddleware(history)];
 
-    const middleware = [thunk, routerMiddleware(history)];
+  const store = createStore(reducers(asyncReducers), initialState, composeWithDevTools(applyMiddleware(...middleware)));
 
-    const store = createStore(reducers(asyncReducers), initialState, composeWithDevTools(applyMiddleware(...middleware)));
+  store.injectReducer = ({ key, reducer }) => {
+    asyncReducers[key] = reducer;
+    store.replaceReducer(reducers(asyncReducers));
+  };
 
-    store.injectReducer = ({ key, reducer }) => {
-        asyncReducers[key] = reducer;
-        store.replaceReducer(reducers(asyncReducers));
-    };
-
-    return store;
+  return store;
 }
