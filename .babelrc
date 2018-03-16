@@ -1,13 +1,24 @@
 {
-    "presets": [
-        [
-            "@babel/preset-env",
-            {
-                "useBuiltIns": "usage",
-                "debug": false
-            }
-        ],
-        "@babel/preset-react",
-        "@babel/preset-stage-0"
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "useBuiltIns": "usage",
+        "debug": false
+      }
+    ],
+    "@babel/preset-react",
+    "@babel/preset-stage-0"
+  ],
+  "plugins": [
+    [
+      "@babel/plugin-transform-runtime",
+      {
+        "helpers": true,
+        "polyfill": false,
+        "regenerator": false,
+        "moduleName": "@babel/runtime"
+      }
     ]
+  ]
 }
