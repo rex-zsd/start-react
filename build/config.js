@@ -1,11 +1,11 @@
 module.exports = {
-    development: {
-        url: '',
-    },
-    test: {
-        url: '',
-    },
-    production: {
-        url: '',
-    },
+  development: {
+    url: '',
+  },
+  test: {
+    url: '',
+  },
+  production: {
+    url: '',
+  },
 };
